@@ -20,7 +20,7 @@ def get_price
 	response_hash["mid_price"]
 end
 
-def buy_order(price)
+def order(price,size)
 	key = API_KEY
 	secret = API_SECRET
 
@@ -32,9 +32,9 @@ def buy_order(price)
 	body = '{
 	  "product_code": "BTC_JPY",
 	  "child_order_type": "LIMIT",
-	  "side": "BUY",
+	  "side":"' + side + '",
 	  "price":' + price + ',
-	  "size": 0.001,
+	  "size":' + size + ',
 	  "minute_to_expire": 10000,
 	  "time_in_force": "GTC"
 	}'
