@@ -20,7 +20,7 @@ def get_price
 	response_hash["mid_price"]
 end
 
-def order(price,size)
+def order(side,price,size)
 	key = API_KEY
 	secret = API_SECRET
 
