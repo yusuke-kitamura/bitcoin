@@ -2,6 +2,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 require './key.rb'
+require "openssl"
 
 # 現在の価格を取得
 def get_price
