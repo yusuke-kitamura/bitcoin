@@ -1,4 +1,4 @@
-# require "./key.rb"
+require "./key.rb"
 require "net/http"
 require "uri"
 require "openssl"
