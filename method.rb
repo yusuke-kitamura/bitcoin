@@ -1,4 +1,3 @@
-# ライブラリを指定
 require 'net/http'
 require 'uri'
 require 'json'
