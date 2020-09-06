@@ -20,6 +20,7 @@ def get_price
 	response_hash["mid_price"]
 end
 
+# 取引方法、値段、取引量をorderの引数として指定
 def order(side,price,size)
 	key = API_KEY
 	secret = API_SECRET
@@ -49,6 +50,31 @@ def order(side,price,size)
 	  "Content-Type" => "application/json"
 	});
 	options.body = body
+
+	https = Net::HTTP.new(uri.host, uri.port)
+	https.use_ssl = true
+	response = https.request(options)
+	puts response.body
+end
+# 現在の資産状況を取得
+def get_wallet
+	key = API_KEY
+	secret = API_SECRET
+
+	timestamp = Time.now.to_i.to_s
+	method = "GET"
+	uri = URI.parse("https://api.bitflyer.com")
+	uri.path = "/v1/me/getbalance"
+
+
+	text = timestamp + method + uri.request_uri
+	sign = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), secret, text)
+
+	options = Net::HTTP::Get.new(uri.request_uri, initheader = {
+	  "ACCESS-KEY" => key,
+	  "ACCESS-TIMESTAMP" => timestamp,
+	  "ACCESS-SIGN" => sign,
+	});
 
 	https = Net::HTTP.new(uri.host, uri.port)
 	https.use_ssl = true
