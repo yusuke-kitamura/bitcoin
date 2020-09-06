@@ -6,10 +6,10 @@ while(1)
 
 	buy_price = 1060000
 	sell_price = 1080000
-	if cuurent_price > sell_price
+	if (cuurent_price > sell_price) && (get_wallet("BTC")["amount"] > 0.001)
 		puts "売ります"
 		order("SELL", sell_price, 0.001)
-	elsif cuurent_price < buy_price
+	elsif cuurent_price < buy_price && (get_wallet("JPY")["amount"] > 1000)
 		puts  "買います"
 		order("BUY", buy_price, 0.001)
 	else
@@ -17,16 +17,3 @@ while(1)
 	end
 	sleep(1)
 end
-
-# 現在の価格を取得
-# puts get_price
-
-#現在の資産状況を確認
-# puts get_wallet("JPY")
-
-# 買い注文
-# order('BUY','1080000','0.001')
-
-# 売り注文
-# order('SELL','1120000','0.001')
-
