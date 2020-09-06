@@ -65,6 +65,21 @@ def get_wallet
 	method = "GET"
 	uri = URI.parse("https://api.bitflyer.com")
 	uri.path = "/v1/me/getbalance"
+	body = '{
+	    "currency_code": "JPY",
+	    "amount": 1024078,
+	    "available": 508000
+	  },
+	  {
+	    "currency_code": "BTC",
+	    "amount": 10.24,
+	    "available": 4.12
+	  },
+	  {
+	    "currency_code": "ETH",
+	    "amount": 20.48,
+	    "available": 16.38
+	  }'
 
 
 	text = timestamp + method + uri.request_uri
