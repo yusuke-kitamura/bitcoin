@@ -8,4 +8,5 @@ bitflyerのAPIを用いたbitcoinの自動売買システム。<br>
 3.bitcoinの値上がり、値下がりに応じた自動売買
 
 ### 開発環境
-ruby 2.5.7
+ruby 2.5.7<br>
+CentOS Linux release 7.7.1908
