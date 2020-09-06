@@ -57,7 +57,7 @@ def order(side,price,size)
 	puts response.body
 end
 # 現在の資産状況を取得
-def get_wallet
+def get_wallet(coin_name)
 	key = API_KEY
 	secret = API_SECRET
 
@@ -65,22 +65,6 @@ def get_wallet
 	method = "GET"
 	uri = URI.parse("https://api.bitflyer.com")
 	uri.path = "/v1/me/getbalance"
-	body = '{
-	    "currency_code": "JPY",
-	    "amount": 1024078,
-	    "available": 508000
-	  },
-	  {
-	    "currency_code": "BTC",
-	    "amount": 10.24,
-	    "available": 4.12
-	  },
-	  {
-	    "currency_code": "ETH",
-	    "amount": 20.48,
-	    "available": 16.38
-	  }'
-
 
 	text = timestamp + method + uri.request_uri
 	sign = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), secret, text)
@@ -94,5 +78,6 @@ def get_wallet
 	https = Net::HTTP.new(uri.host, uri.port)
 	https.use_ssl = true
 	response = https.request(options)
-	puts response.body
+	response_hash = JSON.parse(response.body)
+	response_hash.find {|n| n["currency_code"] === coin_name}
 end
