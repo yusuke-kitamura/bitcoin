@@ -99,23 +99,22 @@ def ifdoneOCO
 	    "product_code": "BTC_JPY",
 	    "condition_type": "LIMIT",
 	    "side": "BUY",
-	    "price": 30000,
-	    "size": 0.1
+	    "price": 1120000,
+	    "size": 0.001
 	  },
 	  {
 	    "product_code": "BTC_JPY",
 	    "condition_type": "LIMIT",
 	    "side": "SELL",
-	    "price": 32000,
-	    "size": 0.1
+	    "price": 1130000,
+	    "size": 0.001
 	  },
 	  {
 	    "product_code": "BTC_JPY",
 	    "condition_type": "STOP_LIMIT",
 	    "side": "SELL",
-	    "price": 28800,
-	    "trigger_price": 29000,
-	    "size": 0.1
+	    "price": 1115000,
+	    "size": 0.001
 	  }]
 	}'
 
