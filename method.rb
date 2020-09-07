@@ -20,7 +20,7 @@ def get_price
 	response_hash["mid_price"]
 end
 
-# 取引方法、値段、取引量をorderの引数として指定
+# 売買、値段、取引量をorderの引数として指定
 def order(side,price,size)
 	key = API_KEY
 	secret = API_SECRET
@@ -56,6 +56,7 @@ def order(side,price,size)
 	response = https.request(options)
 	puts response.body
 end
+
 # 現在の資産状況を取得
 def get_wallet(coin_name)
 	key = API_KEY
@@ -80,4 +81,31 @@ def get_wallet(coin_name)
 	response = https.request(options)
 	response_hash = JSON.parse(response.body)
 	response_hash.find {|n| n["currency_code"] === coin_name}
+end
+
+def ifdoneOCO
+	key = "{{ YOUR API KEY }}"
+	secret = "{{ YOUR API SECRET }}"
+
+	timestamp = Time.now.to_i.to_s
+	method = "POST"
+	uri = URI.parse("https://api.bitflyer.com")
+	uri.path = "/v1/me/sendparentorder"
+	body = ''
+
+	text = timestamp + method + uri.request_uri + body
+	sign = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), secret, text)
+
+	options = Net::HTTP::Post.new(uri.request_uri, initheader = {
+	  "ACCESS-KEY" => key,
+	  "ACCESS-TIMESTAMP" => timestamp,
+	  "ACCESS-SIGN" => sign,
+	  "Content-Type" => "application/json"
+	});
+	options.body = body
+
+	https = Net::HTTP.new(uri.host, uri.port)
+	https.use_ssl = true
+	response = https.request(options)
+	puts response.body
 end
