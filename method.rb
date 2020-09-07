@@ -84,14 +84,40 @@ def get_wallet(coin_name)
 end
 
 def ifdoneOCO
-	key = "{{ YOUR API KEY }}"
-	secret = "{{ YOUR API SECRET }}"
+	key = API_KEY
+	secret = API_SECRET
 
 	timestamp = Time.now.to_i.to_s
 	method = "POST"
 	uri = URI.parse("https://api.bitflyer.com")
 	uri.path = "/v1/me/sendparentorder"
-	body = ''
+	body = '{
+	  "order_method": "IFDOCO",
+	  "minute_to_expire": 10000,
+	  "time_in_force": "GTC",
+	  "parameters": [{
+	    "product_code": "BTC_JPY",
+	    "condition_type": "LIMIT",
+	    "side": "BUY",
+	    "price": 30000,
+	    "size": 0.1
+	  },
+	  {
+	    "product_code": "BTC_JPY",
+	    "condition_type": "LIMIT",
+	    "side": "SELL",
+	    "price": 32000,
+	    "size": 0.1
+	  },
+	  {
+	    "product_code": "BTC_JPY",
+	    "condition_type": "STOP_LIMIT",
+	    "side": "SELL",
+	    "price": 28800,
+	    "trigger_price": 29000,
+	    "size": 0.1
+	  }]
+	}'
 
 	text = timestamp + method + uri.request_uri + body
 	sign = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), secret, text)
